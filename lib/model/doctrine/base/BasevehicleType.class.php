@@ -8,16 +8,19 @@
  * @property string $name
  * @property integer $min
  * @property integer $max
- * @property vehicle $trasportation_type
+ * @property vehicle $vehicle_type
+ * @property booking $vehicle_type_book
  * 
- * @method string      getName()               Returns the current record's "name" value
- * @method integer     getMin()                Returns the current record's "min" value
- * @method integer     getMax()                Returns the current record's "max" value
- * @method vehicle     getTrasportationType()  Returns the current record's "trasportation_type" value
- * @method vehicleType setName()               Sets the current record's "name" value
- * @method vehicleType setMin()                Sets the current record's "min" value
- * @method vehicleType setMax()                Sets the current record's "max" value
- * @method vehicleType setTrasportationType()  Sets the current record's "trasportation_type" value
+ * @method string      getName()              Returns the current record's "name" value
+ * @method integer     getMin()               Returns the current record's "min" value
+ * @method integer     getMax()               Returns the current record's "max" value
+ * @method vehicle     getVehicleType()       Returns the current record's "vehicle_type" value
+ * @method booking     getVehicleTypeBook()   Returns the current record's "vehicle_type_book" value
+ * @method vehicleType setName()              Sets the current record's "name" value
+ * @method vehicleType setMin()               Sets the current record's "min" value
+ * @method vehicleType setMax()               Sets the current record's "max" value
+ * @method vehicleType setVehicleType()       Sets the current record's "vehicle_type" value
+ * @method vehicleType setVehicleTypeBook()   Sets the current record's "vehicle_type_book" value
  * 
  * @package    transfer
  * @subpackage model
@@ -44,7 +47,11 @@ abstract class BasevehicleType extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('vehicle as trasportation_type', array(
+        $this->hasOne('vehicle as vehicle_type', array(
+             'local' => 'id',
+             'foreign' => 'vehicle_type_id'));
+
+        $this->hasOne('booking as vehicle_type_book', array(
              'local' => 'id',
              'foreign' => 'vehicle_type_id'));
 

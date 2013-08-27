@@ -12,24 +12,27 @@
  * @property integer $km
  * @property integer $anno
  * @property string $note
- * @property vehicleType $vehicleType
+ * @property vehicleType $VehicleType
+ * @property Doctrine_Collection $vehicle_transfer
  * 
- * @method bigint      getVehicleTypeId()   Returns the current record's "vehicle_type_id" value
- * @method string      getName()            Returns the current record's "name" value
- * @method string      getPlate()           Returns the current record's "plate" value
- * @method string      getSerial()          Returns the current record's "serial" value
- * @method integer     getKm()              Returns the current record's "km" value
- * @method integer     getAnno()            Returns the current record's "anno" value
- * @method string      getNote()            Returns the current record's "note" value
- * @method vehicleType getVehicleType()     Returns the current record's "vehicleType" value
- * @method vehicle     setVehicleTypeId()   Sets the current record's "vehicle_type_id" value
- * @method vehicle     setName()            Sets the current record's "name" value
- * @method vehicle     setPlate()           Sets the current record's "plate" value
- * @method vehicle     setSerial()          Sets the current record's "serial" value
- * @method vehicle     setKm()              Sets the current record's "km" value
- * @method vehicle     setAnno()            Sets the current record's "anno" value
- * @method vehicle     setNote()            Sets the current record's "note" value
- * @method vehicle     setVehicleType()     Sets the current record's "vehicleType" value
+ * @method bigint              getVehicleTypeId()    Returns the current record's "vehicle_type_id" value
+ * @method string              getName()             Returns the current record's "name" value
+ * @method string              getPlate()            Returns the current record's "plate" value
+ * @method string              getSerial()           Returns the current record's "serial" value
+ * @method integer             getKm()               Returns the current record's "km" value
+ * @method integer             getAnno()             Returns the current record's "anno" value
+ * @method string              getNote()             Returns the current record's "note" value
+ * @method vehicleType         getVehicleType()      Returns the current record's "VehicleType" value
+ * @method Doctrine_Collection getVehicleTransfer()  Returns the current record's "vehicle_transfer" collection
+ * @method vehicle             setVehicleTypeId()    Sets the current record's "vehicle_type_id" value
+ * @method vehicle             setName()             Sets the current record's "name" value
+ * @method vehicle             setPlate()            Sets the current record's "plate" value
+ * @method vehicle             setSerial()           Sets the current record's "serial" value
+ * @method vehicle             setKm()               Sets the current record's "km" value
+ * @method vehicle             setAnno()             Sets the current record's "anno" value
+ * @method vehicle             setNote()             Sets the current record's "note" value
+ * @method vehicle             setVehicleType()      Sets the current record's "VehicleType" value
+ * @method vehicle             setVehicleTransfer()  Sets the current record's "vehicle_transfer" collection
  * 
  * @package    transfer
  * @subpackage model
@@ -71,9 +74,13 @@ abstract class Basevehicle extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('vehicleType', array(
+        $this->hasOne('vehicleType as VehicleType', array(
              'local' => 'vehicle_type_id',
              'foreign' => 'id'));
+
+        $this->hasMany('transfer as vehicle_transfer', array(
+             'local' => 'id',
+             'foreign' => 'vehicle_id'));
 
         $sluggable0 = new Doctrine_Template_Sluggable(array(
              'fields' => 

@@ -7,13 +7,16 @@
  * 
  * @property bigint $sf_guard_user_id
  * @property bigint $contact_id
+ * @property string $value
  * @property sfGuardUser $User
  * 
  * @method bigint       getSfGuardUserId()    Returns the current record's "sf_guard_user_id" value
  * @method bigint       getContactId()        Returns the current record's "contact_id" value
+ * @method string       getValue()            Returns the current record's "value" value
  * @method sfGuardUser  getUser()             Returns the current record's "User" value
  * @method user_contact setSfGuardUserId()    Sets the current record's "sf_guard_user_id" value
  * @method user_contact setContactId()        Sets the current record's "contact_id" value
+ * @method user_contact setValue()            Sets the current record's "value" value
  * @method user_contact setUser()             Sets the current record's "User" value
  * 
  * @package    transfer
@@ -31,6 +34,10 @@ abstract class Baseuser_contact extends sfDoctrineRecord
              ));
         $this->hasColumn('contact_id', 'bigint', null, array(
              'type' => 'bigint',
+             ));
+        $this->hasColumn('value', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
              ));
     }
 

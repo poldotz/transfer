@@ -13,26 +13,35 @@
  * @property string $contact
  * @property string $rif_file
  * @property integer $customer_id
+ * @property bigint $vehicle_type_id
+ * @property boolean $is_confirmed
  * @property sfGuardUser $User
+ * @property vehicleType $VehicleType
  * 
- * @method datetime    getBookingDate()  Returns the current record's "booking_date" value
- * @method integer     getYear()         Returns the current record's "year" value
- * @method integer     getNumber()       Returns the current record's "number" value
- * @method integer     getAdult()        Returns the current record's "adult" value
- * @method integer     getChild()        Returns the current record's "child" value
- * @method string      getContact()      Returns the current record's "contact" value
- * @method string      getRifFile()      Returns the current record's "rif_file" value
- * @method integer     getCustomerId()   Returns the current record's "customer_id" value
- * @method sfGuardUser getUser()         Returns the current record's "User" value
- * @method booking     setBookingDate()  Sets the current record's "booking_date" value
- * @method booking     setYear()         Sets the current record's "year" value
- * @method booking     setNumber()       Sets the current record's "number" value
- * @method booking     setAdult()        Sets the current record's "adult" value
- * @method booking     setChild()        Sets the current record's "child" value
- * @method booking     setContact()      Sets the current record's "contact" value
- * @method booking     setRifFile()      Sets the current record's "rif_file" value
- * @method booking     setCustomerId()   Sets the current record's "customer_id" value
- * @method booking     setUser()         Sets the current record's "User" value
+ * @method datetime    getBookingDate()     Returns the current record's "booking_date" value
+ * @method integer     getYear()            Returns the current record's "year" value
+ * @method integer     getNumber()          Returns the current record's "number" value
+ * @method integer     getAdult()           Returns the current record's "adult" value
+ * @method integer     getChild()           Returns the current record's "child" value
+ * @method string      getContact()         Returns the current record's "contact" value
+ * @method string      getRifFile()         Returns the current record's "rif_file" value
+ * @method integer     getCustomerId()      Returns the current record's "customer_id" value
+ * @method bigint      getVehicleTypeId()   Returns the current record's "vehicle_type_id" value
+ * @method boolean     getIsConfirmed()     Returns the current record's "is_confirmed" value
+ * @method sfGuardUser getUser()            Returns the current record's "User" value
+ * @method vehicleType getVehicleType()     Returns the current record's "VehicleType" value
+ * @method booking     setBookingDate()     Sets the current record's "booking_date" value
+ * @method booking     setYear()            Sets the current record's "year" value
+ * @method booking     setNumber()          Sets the current record's "number" value
+ * @method booking     setAdult()           Sets the current record's "adult" value
+ * @method booking     setChild()           Sets the current record's "child" value
+ * @method booking     setContact()         Sets the current record's "contact" value
+ * @method booking     setRifFile()         Sets the current record's "rif_file" value
+ * @method booking     setCustomerId()      Sets the current record's "customer_id" value
+ * @method booking     setVehicleTypeId()   Sets the current record's "vehicle_type_id" value
+ * @method booking     setIsConfirmed()     Sets the current record's "is_confirmed" value
+ * @method booking     setUser()            Sets the current record's "User" value
+ * @method booking     setVehicleType()     Sets the current record's "VehicleType" value
  * 
  * @package    transfer
  * @subpackage model
@@ -70,6 +79,13 @@ abstract class Basebooking extends sfDoctrineRecord
         $this->hasColumn('customer_id', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('vehicle_type_id', 'bigint', null, array(
+             'type' => 'bigint',
+             ));
+        $this->hasColumn('is_confirmed', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => false,
+             ));
 
 
         $this->index('unique_index', array(
@@ -89,11 +105,21 @@ abstract class Basebooking extends sfDoctrineRecord
              'local' => 'customer_id',
              'foreign' => 'id'));
 
+        $this->hasOne('vehicleType as VehicleType', array(
+             'local' => 'vehicle_type_id',
+             'foreign' => 'id'));
+
         $blameable0 = new Doctrine_Template_Blameable();
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
+        $versionable0 = new Doctrine_Template_Versionable(array(
+             'versionColumn' => 'version',
+             'className' => '%CLASS%Version',
+             'auditLog' => true,
+             ));
         $this->actAs($blameable0);
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
+        $this->actAs($versionable0);
     }
 }

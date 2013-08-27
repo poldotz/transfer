@@ -28,6 +28,7 @@
  * @property user_contact $user_contact
  * @property user_social $user_social
  * @property booking $customer_book
+ * @property Doctrine_Collection $driver_transfer
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
  * @method string                getLastName()              Returns the current record's "last_name" value
@@ -52,6 +53,7 @@
  * @method user_contact          getUserContact()           Returns the current record's "user_contact" value
  * @method user_social           getUserSocial()            Returns the current record's "user_social" value
  * @method booking               getCustomerBook()          Returns the current record's "customer_book" value
+ * @method Doctrine_Collection   getDriverTransfer()        Returns the current record's "driver_transfer" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
  * @method sfGuardUser           setCf()                    Sets the current record's "cf" value
@@ -75,6 +77,7 @@
  * @method sfGuardUser           setUserContact()           Sets the current record's "user_contact" value
  * @method sfGuardUser           setUserSocial()            Sets the current record's "user_social" value
  * @method sfGuardUser           setCustomerBook()          Sets the current record's "customer_book" value
+ * @method sfGuardUser           setDriverTransfer()        Sets the current record's "driver_transfer" collection
  * 
  * @package    transfer
  * @subpackage model
@@ -196,6 +199,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasOne('booking as customer_book', array(
              'local' => 'id',
              'foreign' => 'customer_id'));
+
+        $this->hasMany('transfer as driver_transfer', array(
+             'local' => 'id',
+             'foreign' => 'driver_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));

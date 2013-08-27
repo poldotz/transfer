@@ -19,12 +19,6 @@ class Doctrine_Template_Locatable extends Doctrine_Template
                                     'length'  =>  null,
                                     'alias'   =>  null,
                                     'options' =>  array()),
-                                'postal_code'   =>  array(
-                                    'name'    => 'postal_code',
-                                    'type'    => 'string',
-                                    'length'  =>  10,
-                                    'alias'   =>  null,
-                                    'options' =>  array()),
                             ), 'fields'       => array(),
                                'distance_unit' => 'miles',
    );
@@ -94,8 +88,7 @@ class Doctrine_Template_Locatable extends Doctrine_Template
   {
     $codes = explode(',', file_get_contents($url));
     $geocodes['latitude'] = $codes[2];
-    $geocodes['longitude'] = $codes[3];
-
+    $geocodes['longitude'] = $codes[3];   
     return $geocodes;
   }
   

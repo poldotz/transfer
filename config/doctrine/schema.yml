@@ -1,5 +1,4 @@
 detect_relations: true
-
 regione:
   columns:
     nome:
@@ -33,6 +32,7 @@ comune:
       foreign: id
       foreignAlias: provincia
 address:
+  actAs: [Geographical]
   columns:
     route:
       type: string(255)
@@ -56,24 +56,19 @@ contact:
   columns:
     name:
       type: string(100)
-    value:
-      type: string(255)
 social:
   columns:
     name:
       type: string(100)
-    value:
-      type: string(255)
 configuration:
   columns:
     name:
       type: string(100)
-    value:
-      type: string(255)
 user_contact:
   columns:
     sf_guard_user_id: bigint
     contact_id: bigint
+    value: string(255)
   relations:
     User:
       class: sfGuardUser
@@ -91,6 +86,7 @@ user_social:
   columns:
     sf_guard_user_id: bigint
     social_id: bigint
+    value:     type: string(255)
   relations:
     User:
       class: sfGuardUser
@@ -126,7 +122,6 @@ company:
       local: address_id
       foreign: id
       foreignAlias: company_address
-
 vehicleType:
   actAs:
     Sluggable:
@@ -149,17 +144,21 @@ vehicle:
     anno: integer
     note: string(255)
   relations:
-    vehicleType:
+    VehicleType:
       class: vehicleType
       foreignType: one
       local: vehicle_type_id
       foreign: id
-      foreignAlias: trasportation_type
+      foreignAlias: vehicle_type
 booking:
   actAs:
     Blameable:
     Timestampable:
     SoftDelete:
+    Versionable:
+      versionColumn: version
+      className: %CLASS%Version
+      auditLog: true
   columns:
     booking_date:
       type: datetime
@@ -177,6 +176,11 @@ booking:
       type: string(100)
     customer_id:
       type: integer
+    vehicle_type_id:
+      type: bigint
+    is_confirmed:
+      type: boolean
+      default: false
   relations:
     User:
       class: sfGuardUser
@@ -184,7 +188,123 @@ booking:
       local: customer_id
       foreign: id
       foreignAlias: customer_book
+    VehicleType:
+      class: vehicleType
+      foreignType: one
+      local: vehicle_type_id
+      foreign: id
+      foreignAlias: vehicle_type_book
   indexes:
     unique_index:
       fields: [year,number]
       type: unique
+locality:
+  actAs:
+    Timestampable:
+    Sluggable:
+      fields: [name]
+  columns:
+    name:
+      type: string(255)
+    address_id: bigint
+    is_vector:
+      type: boolean
+  relations:
+    Address:
+      class: address
+      foreignType: one
+      local: address_id
+      foreign: id
+      foreignAlias: locality_address
+locality_contact:
+  columns:
+    licality_id: bigint
+    contact_id: bigint
+    value: string(255)
+  relations:
+    Locality:
+      class: locality
+      foreignType: one
+      local: locality_id
+      foreign: id
+      foreignAlias: locality_contact
+    Social:
+      class: Contact
+      foreignType: one
+      local: contact_id
+      foreign: id
+      foreignAlias: contact_locality
+locality_social:
+  columns:
+    locality_id: bigint
+    social_id: bigint
+    value:     type: string(255)
+  relations:
+    Locality:
+      class: locality
+      foreignType: one
+      local: locality_id
+      foreign: id
+      foreignAlias: locality_social
+    Social:
+      class: Social
+      foreignType: one
+      local: social_id
+      foreign: id
+      foreignAlias: social_locality
+payMethod:
+  columns:
+    name: string(100)
+transfer:
+  actAs:
+    Blameable:
+    Timestampable:
+    SoftDelete:
+    Versionable:
+      versionColumn: version
+      className: %CLASS%Version
+      auditLog: true
+  columns:
+    booking_id: bigint
+    day:
+      type: date
+    hour:
+      type: time
+    pickup_hour:
+      type: time
+    pickup:
+      type: boolean
+    note:
+      type: string(255)
+    flight: string(10)
+    locality_from: bigint
+    locality_to: bigint
+    driver_id: bigint
+    vehicle_id: bigint
+    pay_method_id: bigint
+  relations:
+    LocalityFrom:
+      class: locality
+      local: locality_from
+      foreign: id
+      foreignAlias: locality_from
+    LocalityTo:
+       class: locality
+       local: locality_to
+       foreign: id
+       foreignAlias: locality_to
+    Driver:
+      class: sfGuardUser
+      local: driver_id
+      foreign: id
+      foreignAlias: driver_transfer
+    Vehicle:
+      class: vehicle
+      local: vehicle_id
+      foreign: id
+      foreignAlias: vehicle_transfer
+    PayMethod:
+      class: payMethod
+      local: pay_method_id
+      foreign: id
+      foreignAlias: pay_method_transfer
