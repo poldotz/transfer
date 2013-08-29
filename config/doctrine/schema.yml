@@ -255,7 +255,7 @@ locality_social:
 payMethod:
   columns:
     name: string(100)
-transfer:
+Arrival:
   actAs:
     Blameable:
     Timestampable:
@@ -265,24 +265,93 @@ transfer:
       className: %CLASS%Version
       auditLog: true
   columns:
-    booking_id: bigint
+    booking_id:
+      type: bigint
+      primary_key: true
     day:
       type: date
     hour:
       type: time
-    pickup_hour:
-      type: time
-    pickup:
-      type: boolean
+    flight: string(10)
+    cost:
+      type: decimal(5)
+      scale: 2
     note:
       type: string(255)
-    flight: string(10)
     locality_from: bigint
     locality_to: bigint
     driver_id: bigint
     vehicle_id: bigint
     pay_method_id: bigint
   relations:
+    LocalityFrom:
+      class: locality
+      local: locality_from
+      foreign: id
+      foreignAlias: locality_from
+    Booking:
+      class: booking
+      local: booking_id
+      foreign: id
+      foreignAlias: arrival_booking
+    LocalityTo:
+       class: locality
+       local: locality_to
+       foreign: id
+       foreignAlias: locality_to
+    Driver:
+      class: sfGuardUser
+      local: driver_id
+      foreign: id
+      foreignAlias: driver_transfer
+    Vehicle:
+      class: vehicle
+      local: vehicle_id
+      foreign: id
+      foreignAlias: vehicle_transfer
+    PayMethod:
+      class: payMethod
+      local: pay_method_id
+      foreign: id
+      foreignAlias: pay_method_transfer
+Departure:
+  actAs:
+    Blameable:
+    Timestampable:
+    SoftDelete:
+    Versionable:
+      versionColumn: version
+      className: %CLASS%Version
+      auditLog: true
+  columns:
+    booking_id:
+      type: bigint
+      primary_key: true
+    day:
+      type: date
+    hour:
+      type: time
+    departure_time:
+      type: time
+    pick_up:
+      type: boolean
+    flight: string(10)
+    cost:
+      type: decimal(5)
+      scale: 2
+    note:
+      type: string(255)
+    locality_from: bigint
+    locality_to: bigint
+    driver_id: bigint
+    vehicle_id: bigint
+    pay_method_id: bigint
+  relations:
+    Booking:
+      class: booking
+      local: booking_id
+      foreign: id
+      foreignAlias: departure_booking
     LocalityFrom:
       class: locality
       local: locality_from
