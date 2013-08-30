@@ -32,7 +32,7 @@ abstract class BasepayMethod extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('transfer as pay_method_transfer', array(
+        $this->hasMany('Arrival as pay_method_transfer', array(
              'local' => 'id',
              'foreign' => 'pay_method_id'));
     }

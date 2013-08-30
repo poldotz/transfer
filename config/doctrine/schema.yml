@@ -64,6 +64,8 @@ configuration:
   columns:
     name:
       type: string(100)
+    value:
+      type: string(255)
 user_contact:
   columns:
     sf_guard_user_id: bigint
@@ -218,7 +220,7 @@ locality:
       foreignAlias: locality_address
 locality_contact:
   columns:
-    licality_id: bigint
+    locality_id: bigint
     contact_id: bigint
     value: string(255)
   relations:
@@ -267,7 +269,7 @@ Arrival:
   columns:
     booking_id:
       type: bigint
-      primary_key: true
+      primary: true
     day:
       type: date
     hour:
@@ -326,7 +328,7 @@ Departure:
   columns:
     booking_id:
       type: bigint
-      primary_key: true
+      primary: true
     day:
       type: date
     hour:
@@ -377,3 +379,36 @@ Departure:
       local: pay_method_id
       foreign: id
       foreignAlias: pay_method_transfer
+vector_type:
+  columns:
+    name: string(100)
+vector:
+  columns:
+    code: string(100)
+    vector_type_id: bigint
+    locality_id: bigint
+  relations:
+    VectorType:
+      class: VectoryType
+      local: vectory_type_id
+      foreign: id
+      foreignAlias: vector_type
+    Locality:
+       class: locality
+       local: locality_id
+       foreign: id
+       foreignAlias: locality_vector
+flight:
+  columns:
+    code: string(10)
+    valid_from:
+      type: date
+    valid_to:
+      type: date
+    departure: time
+    arrival: time
+    days: integer
+Carrier:
+  columns:
+    code: string(10)
+    name: string(100)

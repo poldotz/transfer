@@ -78,7 +78,7 @@ abstract class Basevehicle extends sfDoctrineRecord
              'local' => 'vehicle_type_id',
              'foreign' => 'id'));
 
-        $this->hasMany('transfer as vehicle_transfer', array(
+        $this->hasMany('Arrival as vehicle_transfer', array(
              'local' => 'id',
              'foreign' => 'vehicle_id'));
 

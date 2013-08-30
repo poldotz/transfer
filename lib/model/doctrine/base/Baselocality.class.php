@@ -13,6 +13,7 @@
  * @property locality_social $locality_social
  * @property Doctrine_Collection $locality_from
  * @property Doctrine_Collection $locality_to
+ * @property Doctrine_Collection $locality_vector
  * 
  * @method string              getName()             Returns the current record's "name" value
  * @method bigint              getAddressId()        Returns the current record's "address_id" value
@@ -22,6 +23,7 @@
  * @method locality_social     getLocalitySocial()   Returns the current record's "locality_social" value
  * @method Doctrine_Collection getLocalityFrom()     Returns the current record's "locality_from" collection
  * @method Doctrine_Collection getLocalityTo()       Returns the current record's "locality_to" collection
+ * @method Doctrine_Collection getLocalityVector()   Returns the current record's "locality_vector" collection
  * @method locality            setName()             Sets the current record's "name" value
  * @method locality            setAddressId()        Sets the current record's "address_id" value
  * @method locality            setIsVector()         Sets the current record's "is_vector" value
@@ -30,6 +32,7 @@
  * @method locality            setLocalitySocial()   Sets the current record's "locality_social" value
  * @method locality            setLocalityFrom()     Sets the current record's "locality_from" collection
  * @method locality            setLocalityTo()       Sets the current record's "locality_to" collection
+ * @method locality            setLocalityVector()   Sets the current record's "locality_vector" collection
  * 
  * @package    transfer
  * @subpackage model
@@ -68,13 +71,17 @@ abstract class Baselocality extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'locality_id'));
 
-        $this->hasMany('transfer as locality_from', array(
+        $this->hasMany('Arrival as locality_from', array(
              'local' => 'id',
              'foreign' => 'locality_from'));
 
-        $this->hasMany('transfer as locality_to', array(
+        $this->hasMany('Arrival as locality_to', array(
              'local' => 'id',
              'foreign' => 'locality_to'));
+
+        $this->hasMany('vector as locality_vector', array(
+             'local' => 'id',
+             'foreign' => 'locality_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $sluggable0 = new Doctrine_Template_Sluggable(array(

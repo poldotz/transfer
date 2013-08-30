@@ -200,7 +200,7 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'customer_id'));
 
-        $this->hasMany('transfer as driver_transfer', array(
+        $this->hasMany('Arrival as driver_transfer', array(
              'local' => 'id',
              'foreign' => 'driver_id'));
 
