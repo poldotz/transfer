@@ -398,6 +398,10 @@ vector:
        local: locality_id
        foreign: id
        foreignAlias: locality_vector
+Carrier:
+  columns:
+    code: string(10)
+    name: string(100)
 flight:
   columns:
     code: string(10)
@@ -408,7 +412,10 @@ flight:
     departure: time
     arrival: time
     days: integer
-Carrier:
-  columns:
-    code: string(10)
-    name: string(100)
+    carrier_id: bigint
+  relations:
+    Carrier:
+      class: Carrier
+      local: carrier_id
+      foreign: id
+      foreignAlias: flight_carrier
