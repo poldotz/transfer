@@ -40,43 +40,39 @@ class JsMinTask extends Task
      *
      * @var  FileSet
      */
-    protected $occured
-     *
-     * @var boolean
-     */
-    protected $ould fail, if
+    protected $filesets    = array();
+    /**
+     * Whether the build should fail, if
      * errors occured
      *
      * @var boolean
      */
-    protected $failonerror = false;
-    
-    /**
-     * Define if the target should use or not a suffix -min
+    protected $ix -min
      *
      * @var boolean
      */
-    protected $
+    protected $get should use or not a suffix -min
      *
-     * @var  string
+     * @var boolean
      */
-    prectory to put minified javascript files into
-     *
-     * @var  string
-     */
-    protected $targetDir;
-
+    protected $suffix   = '-min';
+    
     /**
-     *  Nested creator, adds a set of files (nested fileset attribute).
+     * directory to put minified javascript files into
+     *
+     * @var  string
+     */
+    protected $ute).
+     */
+    public function createFileSet()
+    {
+        $nested fileset attribute).
      */
     public function createFileSet()
     {
         $num = array_push($this->filesets, new FileSet());
-        return $this->filesets[$num - 1];
-    }
-
-    /**
-     * Whether the build should fail, if an error occured.
+        return $this->filesets[$   *
+     * @param boolean $  * Whether the build should fail, if an error occured.
      *
      * @param boolean $value
      */
@@ -92,23 +88,29 @@ class JsMinTask extends Task
      */
     public function setSuffix($value)
     {
-        $this->suffix = $ould be put inot
-     *
-     * @param  string  $ory where minified javascript files should be put inot
+        $this->suffix = $value;
+    }
+    
+    /**
+     * sets the directory where minified javascript files should be put inot
      *
      * @param  string  $targetDir
      */
     public function setTargetDir($targetDir)
     {
-        $this->targetDir = $thod.
+        $this->targetDir = $targetDir;
+    }
+
+    /**
+     * The init method: Do init steps.
      */
-    public function main()
+    public function init()
     {
-        fore  * The main entry point method.
-     */
-    public function main()
-    {
-        fore  * The main entry point method.
+        return true;
+    }
+
+    /**
+     * The main entry point method.
      */
     public function main()
     {
@@ -129,12 +131,16 @@ class JsMinTask extends Task
                         $this->log("Could not minify file $file: " . $jsme->getMessage(), Project::MSG_ERR);
                     }
                 }
-            } catch (BuildException $ ($ {
+            } catch (BuildException $be) {
                 // directory doesn't exist or is not readable
                 if ($this->failonerror) {
                     throw $be;
                 } else {
-                    $this->log($be->getMessage(), $this->quiet ? Project::MSG_VERBOSE : Project::MSG_WARN);
+                    $this->log($be->getMessage(), $ }
+        }
+    }
+}
+::MSG_VERBOSE : Project::MSG_WARN);
                 }
             }
         }

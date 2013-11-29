@@ -58,10 +58,11 @@ class UntarTask extends ExtractBaseTask {
     protected function listArchiveContent(PhingFile $tarfile)
     {
         $tar = $this->initTar($tarfile);
-        return $ssion forContent();
+        return $tar->listContent();
     }
 
-   orrect compression for the givenlass with correct compression for the given file.
+    /**
+     * Init a Archive_Tar class with correct compression for the given file.
      *
      * @param PhingFile $tarfile
      * @return Archive_Tar the tar class instance
@@ -78,8 +79,7 @@ class UntarTask extends ExtractBaseTask {
             );
         foreach ($compressions as $algo => $ext) {
             if (array_search($mode, $ext) !== false) {
-                $compression = $algo;
-                break;
+                $compression = $                      break;
             }
         }
 
