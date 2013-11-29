@@ -16,7 +16,7 @@ sf_guard_signout:
 
 sf_guard_password:
   url:   /request_password
-  param: { module: sfGuardAuth, action: password }
+  param: { module: sfGuardForgotPassword, action: password }
 
 # generic rules
 # please, remove them by adding more specific rules

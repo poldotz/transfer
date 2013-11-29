@@ -6,6 +6,9 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
+      <!--[if lte IE 7]>
+      <script src="css/icomoon-font/lte-ie7.js"></script>
+      <![endif]-->
     <?php include_javascripts() ?>
   </head>
   <body>

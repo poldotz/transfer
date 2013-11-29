@@ -6,7 +6,7 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
+    title:         transfer
     #description:  symfony project
     #keywords:     symfony, project
     #language:     en
@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [main.css]
 
-  javascripts:    []
+  javascripts:    [html5-trunk.js,jquery.min.js,bootstrap.js]
 
   has_layout:     true
   layout:         layout
