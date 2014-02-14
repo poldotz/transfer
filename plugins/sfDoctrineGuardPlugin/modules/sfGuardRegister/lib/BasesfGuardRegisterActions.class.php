@@ -9,7 +9,7 @@ class BasesfGuardRegisterActions extends sfActions
       $this->getUser()->setFlash('notice', 'You are already registered and signed in!');
       $this->redirect('@homepage');
     }
-
+    $first_access = Doctrine_Query::create()->
     $this->form = new sfGuardRegisterForm();
 
     if ($request->isMethod('post'))
