@@ -7,15 +7,18 @@
  * 
  * @property string $code
  * @property string $name
+ * @property Doctrine_Collection $flight_carrier
  * 
- * @method string  getCode() Returns the current record's "code" value
- * @method string  getName() Returns the current record's "name" value
- * @method Carrier setCode() Sets the current record's "code" value
- * @method Carrier setName() Sets the current record's "name" value
+ * @method string              getCode()           Returns the current record's "code" value
+ * @method string              getName()           Returns the current record's "name" value
+ * @method Doctrine_Collection getFlightCarrier()  Returns the current record's "flight_carrier" collection
+ * @method Carrier             setCode()           Sets the current record's "code" value
+ * @method Carrier             setName()           Sets the current record's "name" value
+ * @method Carrier             setFlightCarrier()  Sets the current record's "flight_carrier" collection
  * 
  * @package    transfer
  * @subpackage model
- * @author     Your name here
+ * @author     poldotz
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseCarrier extends sfDoctrineRecord
@@ -36,6 +39,8 @@ abstract class BaseCarrier extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasMany('flight as flight_carrier', array(
+             'local' => 'id',
+             'foreign' => 'carrier_id'));
     }
 }

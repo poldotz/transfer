@@ -7,9 +7,6 @@
  * 
  * @property string $first_name
  * @property string $last_name
- * @property string $cf
- * @property string $piva
- * @property bigint $address_id
  * @property string $email_address
  * @property string $username
  * @property string $algorithm
@@ -20,7 +17,6 @@
  * @property timestamp $last_login
  * @property Doctrine_Collection $Groups
  * @property Doctrine_Collection $Permissions
- * @property address $Address
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
@@ -32,9 +28,6 @@
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
  * @method string                getLastName()              Returns the current record's "last_name" value
- * @method string                getCf()                    Returns the current record's "cf" value
- * @method string                getPiva()                  Returns the current record's "piva" value
- * @method bigint                getAddressId()             Returns the current record's "address_id" value
  * @method string                getEmailAddress()          Returns the current record's "email_address" value
  * @method string                getUsername()              Returns the current record's "username" value
  * @method string                getAlgorithm()             Returns the current record's "algorithm" value
@@ -45,7 +38,6 @@
  * @method timestamp             getLastLogin()             Returns the current record's "last_login" value
  * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
  * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
- * @method address               getAddress()               Returns the current record's "Address" value
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
@@ -56,9 +48,6 @@
  * @method Doctrine_Collection   getDriverTransfer()        Returns the current record's "driver_transfer" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
- * @method sfGuardUser           setCf()                    Sets the current record's "cf" value
- * @method sfGuardUser           setPiva()                  Sets the current record's "piva" value
- * @method sfGuardUser           setAddressId()             Sets the current record's "address_id" value
  * @method sfGuardUser           setEmailAddress()          Sets the current record's "email_address" value
  * @method sfGuardUser           setUsername()              Sets the current record's "username" value
  * @method sfGuardUser           setAlgorithm()             Sets the current record's "algorithm" value
@@ -69,7 +58,6 @@
  * @method sfGuardUser           setLastLogin()             Sets the current record's "last_login" value
  * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
  * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
- * @method sfGuardUser           setAddress()               Sets the current record's "Address" value
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
@@ -81,7 +69,7 @@
  * 
  * @package    transfer
  * @subpackage model
- * @author     Your name here
+ * @author     poldotz
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BasesfGuardUser extends sfDoctrineRecord
@@ -96,17 +84,6 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasColumn('last_name', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
-             ));
-        $this->hasColumn('cf', 'string', 16, array(
-             'type' => 'string',
-             'length' => 16,
-             ));
-        $this->hasColumn('piva', 'string', 11, array(
-             'type' => 'string',
-             'length' => 11,
-             ));
-        $this->hasColumn('address_id', 'bigint', null, array(
-             'type' => 'bigint',
              ));
         $this->hasColumn('email_address', 'string', 255, array(
              'type' => 'string',
@@ -167,10 +144,6 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'refClass' => 'sfGuardUserPermission',
              'local' => 'user_id',
              'foreign' => 'permission_id'));
-
-        $this->hasOne('address as Address', array(
-             'local' => 'address_id',
-             'foreign' => 'id'));
 
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',

@@ -13,36 +13,33 @@
  * @property string $postal_code
  * @property decimal $latitude
  * @property decimal $longitude
- * @property sfGuardUser $user_address
  * @property company $company_address
  * @property locality $locality_address
  * 
- * @method string      getRoute()            Returns the current record's "route" value
- * @method string      getCity()             Returns the current record's "city" value
- * @method string      getProvince()         Returns the current record's "province" value
- * @method string      getRegion()           Returns the current record's "region" value
- * @method string      getCountry()          Returns the current record's "country" value
- * @method string      getPostalCode()       Returns the current record's "postal_code" value
- * @method decimal     getLatitude()         Returns the current record's "latitude" value
- * @method decimal     getLongitude()        Returns the current record's "longitude" value
- * @method sfGuardUser getUserAddress()      Returns the current record's "user_address" value
- * @method company     getCompanyAddress()   Returns the current record's "company_address" value
- * @method locality    getLocalityAddress()  Returns the current record's "locality_address" value
- * @method address     setRoute()            Sets the current record's "route" value
- * @method address     setCity()             Sets the current record's "city" value
- * @method address     setProvince()         Sets the current record's "province" value
- * @method address     setRegion()           Sets the current record's "region" value
- * @method address     setCountry()          Sets the current record's "country" value
- * @method address     setPostalCode()       Sets the current record's "postal_code" value
- * @method address     setLatitude()         Sets the current record's "latitude" value
- * @method address     setLongitude()        Sets the current record's "longitude" value
- * @method address     setUserAddress()      Sets the current record's "user_address" value
- * @method address     setCompanyAddress()   Sets the current record's "company_address" value
- * @method address     setLocalityAddress()  Sets the current record's "locality_address" value
+ * @method string   getRoute()            Returns the current record's "route" value
+ * @method string   getCity()             Returns the current record's "city" value
+ * @method string   getProvince()         Returns the current record's "province" value
+ * @method string   getRegion()           Returns the current record's "region" value
+ * @method string   getCountry()          Returns the current record's "country" value
+ * @method string   getPostalCode()       Returns the current record's "postal_code" value
+ * @method decimal  getLatitude()         Returns the current record's "latitude" value
+ * @method decimal  getLongitude()        Returns the current record's "longitude" value
+ * @method company  getCompanyAddress()   Returns the current record's "company_address" value
+ * @method locality getLocalityAddress()  Returns the current record's "locality_address" value
+ * @method address  setRoute()            Sets the current record's "route" value
+ * @method address  setCity()             Sets the current record's "city" value
+ * @method address  setProvince()         Sets the current record's "province" value
+ * @method address  setRegion()           Sets the current record's "region" value
+ * @method address  setCountry()          Sets the current record's "country" value
+ * @method address  setPostalCode()       Sets the current record's "postal_code" value
+ * @method address  setLatitude()         Sets the current record's "latitude" value
+ * @method address  setLongitude()        Sets the current record's "longitude" value
+ * @method address  setCompanyAddress()   Sets the current record's "company_address" value
+ * @method address  setLocalityAddress()  Sets the current record's "locality_address" value
  * 
  * @package    transfer
  * @subpackage model
- * @author     Your name here
+ * @author     poldotz
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class Baseaddress extends sfDoctrineRecord
@@ -89,10 +86,6 @@ abstract class Baseaddress extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('sfGuardUser as user_address', array(
-             'local' => 'id',
-             'foreign' => 'address_id'));
-
         $this->hasOne('company as company_address', array(
              'local' => 'id',
              'foreign' => 'address_id'));

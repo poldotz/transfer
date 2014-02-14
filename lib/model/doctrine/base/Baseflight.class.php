@@ -11,6 +11,8 @@
  * @property time $departure
  * @property time $arrival
  * @property integer $days
+ * @property bigint $carrier_id
+ * @property Carrier $Carrier
  * 
  * @method string  getCode()       Returns the current record's "code" value
  * @method date    getValidFrom()  Returns the current record's "valid_from" value
@@ -18,16 +20,20 @@
  * @method time    getDeparture()  Returns the current record's "departure" value
  * @method time    getArrival()    Returns the current record's "arrival" value
  * @method integer getDays()       Returns the current record's "days" value
+ * @method bigint  getCarrierId()  Returns the current record's "carrier_id" value
+ * @method Carrier getCarrier()    Returns the current record's "Carrier" value
  * @method flight  setCode()       Sets the current record's "code" value
  * @method flight  setValidFrom()  Sets the current record's "valid_from" value
  * @method flight  setValidTo()    Sets the current record's "valid_to" value
  * @method flight  setDeparture()  Sets the current record's "departure" value
  * @method flight  setArrival()    Sets the current record's "arrival" value
  * @method flight  setDays()       Sets the current record's "days" value
+ * @method flight  setCarrierId()  Sets the current record's "carrier_id" value
+ * @method flight  setCarrier()    Sets the current record's "Carrier" value
  * 
  * @package    transfer
  * @subpackage model
- * @author     Your name here
+ * @author     poldotz
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class Baseflight extends sfDoctrineRecord
@@ -54,11 +60,16 @@ abstract class Baseflight extends sfDoctrineRecord
         $this->hasColumn('days', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('carrier_id', 'bigint', null, array(
+             'type' => 'bigint',
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Carrier', array(
+             'local' => 'carrier_id',
+             'foreign' => 'id'));
     }
 }

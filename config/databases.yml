@@ -1,21 +1,10 @@
-dev:
-  propel:
-    param:
-      classname: DebugPDO
-      debug: { realmemoryusage: true, details: { time: { enabled: true }, slow: { enabled: true, threshold: 0.1 }, mem: { enabled: true }, mempeak: { enabled: true }, memdelta: { enabled: true } } }
-test:
-  propel:
-    param:
-      classname: DebugPDO
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/07-Databases
+
 all:
-  propel:
-    class: sfPropelDatabase
+  doctrine:
+    class: sfDoctrineDatabase
     param:
-      classname: PropelPDO
-      dsn: 'mysql:host=localhost;dbname=transferplus' # @EDIT
-      username: root # @EDIT
+      dsn:      mysql:host=localhost;dbname=tradeagent
+      username: root
       password: lpodda
-      encoding: # On laisse l'encodage vide pour les versions de PHP inférieures à 5.3.6, pour les version supérieures mettre utf8 @EDIT
-      persistent: true
-      pooling: true
-      queries: { value: 'SET NAMES UTF8;' }
